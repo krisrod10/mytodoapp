@@ -1,10 +1,9 @@
 import React from 'react'
 import './App.css';
-import Listitems from '../src/Listitems';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Listitems from './Listitems';
 
-library.add(faTrash);
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class App extends React.Component {
     }
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
-    this.deleteItems = this.deleteItems.bind(this);
+    this.deleteItems = this.delete.bind(this);
   }
   handleInput(e) {
     this.setState({
@@ -45,7 +44,7 @@ class App extends React.Component {
     }
   }
 
-  deleteItems(key){
+  delete(key){
     const filteredItems = this.state.items.filter(item =>
       item.key!==key);
       this.setState({
@@ -53,7 +52,7 @@ class App extends React.Component {
       })
   }
 
-  render() {
+  render(props) {
     return (
       <div className="App">
         <header>
@@ -62,6 +61,7 @@ class App extends React.Component {
               value={this.state.currentItem.text}
               onChange={this.handleInput} />
             <button type="submit">Add</button>
+            
           </form>
         </header>
         <Listitems items={this.state.items}
